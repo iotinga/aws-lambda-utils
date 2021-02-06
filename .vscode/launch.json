@@ -1,0 +1,64 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to SAM CLI",
+      "type": "node",
+      "request": "attach",
+      "address": "localhost",
+      "port": 5858,
+      "localRoot": "${workspaceRoot}",
+      "remoteRoot": "/var/task",
+      "protocol": "inspector",
+      "stopOnEntry": false,
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "dynamodb-utils",
+      "type": "node",
+      "request": "launch",
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceRoot}/tsconfig.json",
+        "NODE_PATH": "${workspaceRoot}/node_modules"
+      },
+      "runtimeArgs": [
+        "${workspaceRoot}/node_modules/mocha/bin/mocha",
+        "--require",
+        "ts-node/register",
+        "--inspect-brk",
+        "--colors",
+        "--recursive",
+        "--no-timeouts",
+        "${relativeFile}"
+      ],
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    },
+    {
+      "name": "dynamodb-utils (suite)",
+      "type": "node",
+      "request": "launch",
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceRoot}/tsconfig.json",
+        "NODE_PATH": "${workspaceRoot}/node_modules"
+      },
+      "runtimeArgs": [
+        "${workspaceRoot}/node_modules/mocha/bin/mocha",
+        "--require",
+        "ts-node/register",
+        "--inspect-brk",
+        "--colors",
+        "--recursive",
+        "--timeout",
+        "50000",
+        "${workspaceRoot}/test/**/*Test.ts"
+      ],
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    }
+  ]
+}
